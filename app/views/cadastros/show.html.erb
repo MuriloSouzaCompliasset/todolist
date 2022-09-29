@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @cadastro.nome %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @cadastro.estado %>
+</p>
+<p>
+  <strong>Criado em:</strong>
+  <%= @cadastro.created_at.strftime("%d/%m/%Y") %>
+</p>
+<%= link_to 'Editar', edit_cadastro_path(@cadastro) %> |
+<%= link_to 'Voltar', cadastros_path %>

@@ -1,0 +1,44 @@
+<div class="container mt-2">
+  <%= render 'form', cadastro: @cadastro %>
+  <p id="notice"><%= notice %></p>
+  <h1>Tarefas</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Nome</th>
+        <th scope="col">Criado em</th>
+         <th scope="col">Situação</th>
+        <th colspan="2">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cadastros.each do |cadastro| %>
+        <tr classs="table-text d-flex">
+          <% if cadastro.estado == "true" %>
+            <tr class="table-active" style="opacity:0.5;text-decoration-line: line-through;">
+          <% else %>
+            <tr>
+          <% end %>
+          <%= form_with(model: cadastro, local: true) do |form| %>
+            <td scope="row"> 
+              <%= form.check_box :estado, {:class => "form-check-input", :onclick => "this.form.submit()"}, "true", "false"%>
+            </td>
+          <% end %>
+            <td scope="row"><%= cadastro.nome %></td>
+            <td scope="row"><%= cadastro.created_at.strftime("%d/%m/%Y") %></td>
+            <td scope="row">
+              <% if cadastro.estado == "true" %>
+                Concluido
+              <% else %>
+                Pendente
+              <% end %>
+            </td>
+            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary"%></td>
+            <td><%= link_to 'Deletar', cadastro, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+          </tr>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
