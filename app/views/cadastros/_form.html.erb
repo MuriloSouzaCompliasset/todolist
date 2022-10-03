@@ -1,33 +1,24 @@
-<div class="container">
-  <%= form_with(model: cadastro, local: true) do |form| %>
-    <% if cadastro.errors.any? %>
-      <div id="error_explanation">
-      <h2><%= pluralize(cadastro.errors.count, "error") %> prohibited this cadastro from being saved:</h2>
-      <ul>
-        <% cadastro.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Nova Tarefa</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-  <% end %>
-</div>
-<div class="modal fade" id="addTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Nova Tarefa</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+
+    <%= form_for @cadastro, remote: true do |form| %>
+      
       <div class="modal-body">
         <div class="col">
           <%= form.text_field :nome, placeholder: "Adicione aqui sua tarefa", class: "form-control" %>
         </div>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <%= form.submit "Cadastrar", class: "btn btn-outline-dark"%>
+        <%= form.submit "Cadastrar", class: "btn btn-outline-dark" %>
       </div>
-       <% end %>
-    </div>
+
+    <% end %>
+
   </div>
 </div>

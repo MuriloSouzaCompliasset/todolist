@@ -35,7 +35,7 @@
                 Pendente
               <% end %>
             </td>
-            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", "data-bs-toggle" => "modal", "data-bs-target" => "#addTarefa", :remote => true %></td>
+            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", remote: true %></td>
             <td><%= link_to 'Deletar', cadastro, class: "teste btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
           </tr>
         </tr>
@@ -43,3 +43,6 @@
     </tbody>
   </table>
 </div>
+
+
+<div class="modal fade" id="modal-cadastro"></div>
