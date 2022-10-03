@@ -1,5 +1,6 @@
 <div class="container mt-2">
   <%= render 'form', cadastro: @cadastro %>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTarefa">Nova Tarefa</button>
   <p id="notice"><%= notice %></p>
   <h1>Tarefas</h1>
   <table class="table table-hover">
@@ -8,7 +9,7 @@
         <th scope="col"></th>
         <th scope="col">Nome</th>
         <th scope="col">Criado em</th>
-         <th scope="col">Situação</th>
+        <th scope="col">Situação</th>
         <th colspan="2">Opções</th>
       </tr>
     </thead>
@@ -34,8 +35,8 @@
                 Pendente
               <% end %>
             </td>
-            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary"%></td>
-            <td><%= link_to 'Deletar', cadastro, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", "data-bs-toggle" => "modal", "data-bs-target" => "#addTarefa", :remote => true %></td>
+            <td><%= link_to 'Deletar', cadastro, class: "teste btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
           </tr>
         </tr>
       <% end %>
