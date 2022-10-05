@@ -1,8 +1,19 @@
 <div class="container mt-2">
-  <%= render 'form', cadastro: @cadastro %>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTarefa">Nova Tarefa</button>
+  <%= link_to 'Nova Tarefa', new_cadastro_path, class: "btn btn-primary", remote: true %>
   <p id="notice"><%= notice %></p>
-  <h1>Tarefas</h1>
+  <div class="row"> 
+    <div class="col-sm-8">
+      <h1>Tarefas</h1>
+    </div>
+    <div class="col-sm-4 my-1">
+      <%= form_tag cadastros_path, method: 'get' do %>
+        <div class="input-group">
+          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Pesquisar", style: "border-right: none;" %>
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -16,30 +27,26 @@
     <tbody>
       <% @cadastros.each do |cadastro| %>
         <tr classs="table-text d-flex">
-          <% if cadastro.estado == "true" %>
+          <% if cadastro.estado == "Concluido" %>
             <tr class="table-active" style="opacity:0.5;text-decoration-line: line-through;">
           <% else %>
             <tr>
           <% end %>
-          <%= form_with(model: cadastro, local: true) do |form| %>
-            <td scope="row"> 
-              <%= form.check_box :estado, {:class => "form-check-input", :onclick => "this.form.submit()"}, "true", "false"%>
-            </td>
-          <% end %>
+            <%= form_with(model: cadastro, local: true) do |form| %>
+              <td scope="row"> 
+                <%= form.check_box :estado, {class: "form-check-input", onclick: "this.form.submit();"}, "Concluido", "Pendente" %>
+              </td>
+            <% end %>
             <td scope="row"><%= cadastro.nome %></td>
             <td scope="row"><%= cadastro.created_at.strftime("%d/%m/%Y") %></td>
-            <td scope="row">
-              <% if cadastro.estado == "true" %>
-                Concluido
-              <% else %>
-                Pendente
-              <% end %>
-            </td>
-            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", "data-bs-toggle" => "modal", "data-bs-target" => "#addTarefa", :remote => true %></td>
-            <td><%= link_to 'Deletar', cadastro, class: "teste btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+            <td scope="row"><%= cadastro.estado %></td>
+            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", remote: true %></td>
+            <td><%= link_to 'Deletar', cadastro, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
           </tr>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<div class="modal fade" id="modal-cadastro"></div>

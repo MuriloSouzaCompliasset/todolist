@@ -3,8 +3,8 @@ class CadastrosController < ApplicationController
 
   # GET /cadastros or /cadastros.json
   def index
-    @cadastros = Cadastro.all
     @cadastro = Cadastro.new
+    @cadastros = Cadastro.search(params[:search])
   end
 
   # GET /cadastros/1 or /cadastros/1.json
