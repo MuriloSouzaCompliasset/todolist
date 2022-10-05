@@ -6,9 +6,9 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-   2.6.6
+2.6.6
 * Rails version
-   5.2.8.1
+5.2.8.1
 * Database creation
-   bundle install
-   rake db:migrate
+bundle install
+rake db:migrate
