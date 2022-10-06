@@ -14,14 +14,14 @@
       <% end %>
     </div>
   </div>
-  <table class="table table-hover">
+  <table class="table table-hover" id='tarefas'>
     <thead>
       <tr>
         <th scope="col"></th>
-        <th scope="col">Nome</th>
-        <th scope="col">Criado em</th>
-        <th scope="col">Situação</th>
-        <th colspan="2">Opções</th>
+        <th scope="col"><%= sortable "nome", 'Nome' %></th>
+        <th scope="col"><%= sortable "created_at", 'Criado em' %></th>
+        <th scope="col"><%= sortable "estado", 'Situação' %></th>
+        <th>Opções</th>
       </tr>
     </thead>
     <tbody>
@@ -33,15 +33,15 @@
             <tr>
           <% end %>
             <%= form_with(model: cadastro, local: true) do |form| %>
-              <td scope="row"> 
+              <td class="align-baseline" scope="row"> 
                 <%= form.check_box :estado, {class: "form-check-input", onclick: "this.form.submit();"}, "Concluido", "Pendente" %>
               </td>
             <% end %>
             <td scope="row"><%= cadastro.nome %></td>
             <td scope="row"><%= cadastro.created_at.strftime("%d/%m/%Y") %></td>
             <td scope="row"><%= cadastro.estado %></td>
-            <td><%= link_to 'Editar', edit_cadastro_path(cadastro), class: "btn btn-outline-primary", remote: true %></td>
-            <td><%= link_to 'Deletar', cadastro, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+            <td><%= link_to raw("<i class=\"fas fa-pen\"></i>"), edit_cadastro_path(cadastro), class: "btn btn-outline-primary", style: "border: none;", title: 'Editar','data-toggle' => 'tooltip', 'data-placement' => 'top', remote: true %>
+            <%= link_to raw("<i class=\"fas fa-trash\"></i>"), cadastro, class: "btn btn-outline-danger", style: "border: none;", title: 'Deletar','data-toggle' => 'tooltip', 'data-placement' => 'top',method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
           </tr>
         </tr>
       <% end %>

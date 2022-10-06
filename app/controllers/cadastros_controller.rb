@@ -1,10 +1,11 @@
 class CadastrosController < ApplicationController
   before_action :set_cadastro, only: %i[ show edit update destroy ]
-
+  helper_method :sort_column, :sort_direction
   # GET /cadastros or /cadastros.json
   def index
     @cadastro = Cadastro.new
     @cadastros = Cadastro.search(params[:search])
+                         .order(sort_column + " " + sort_direction)
   end
 
   # GET /cadastros/1 or /cadastros/1.json
@@ -67,5 +68,13 @@ class CadastrosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def cadastro_params
       params.require(:cadastro).permit(:nome, :estado)
+    end
+
+    def sort_column
+      Cadastro.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
