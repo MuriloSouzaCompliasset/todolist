@@ -6,6 +6,7 @@ class CadastrosController < ApplicationController
     @cadastro = Cadastro.new
     @cadastros = Cadastro.search(params[:search])
                          .order(sort_column + " " + sort_direction)
+                         .page(params[:page]).per(10)
   end
 
   # GET /cadastros/1 or /cadastros/1.json
@@ -75,6 +76,6 @@ class CadastrosController < ApplicationController
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end
