@@ -7,8 +7,8 @@ Things you may want to cover:
 
 * Ruby version <br>
 2.6.6
-* Rails version
+* Rails version <br>
 5.2.8.1
-* Database creation
-bundle install
+* Database creation <br>
+bundle install <br>
 rake db:migrate
